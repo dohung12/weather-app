@@ -7,13 +7,28 @@
     <title>Weather App</title>
   </head>
   <body>
-    <form action="">
-      <p>
-        <label for="location">I want to see the Weather of: </label>
-        <input type="text" id="location" name="location" />
-      </p>
-      <button type="submit">Submit</button>
-    </form>
+    <header>
+      <h1>Weather Forecast</h1>
+      <form action="">
+        <p>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Search your location ..."
+          />
+        </p>
+        <button type="submit">Submit</button>
+      </form>
+    </header>
+
+    <main>
+      <div class="current-weather"></div>
+      <div class="air-quality"></div>
+      <div class="today-timestamp-temp"></div>
+      <div class="tomr-weather"></div>
+    </main>
+
     <script src="./bundle.js"></script>
   </body>
 </html>
