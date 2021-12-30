@@ -481,14 +481,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getData)
 /* harmony export */ });
-async function getData(lat, lon) {
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alert&appid=089669fece331a258cf56a3771f30bb9&units=metric`;
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-  const data = await fetch(url, { mode: "cors" });
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-  return data.json();
+function getData(_x, _x2) {
+  return _getData.apply(this, arguments);
 }
 
+function _getData() {
+  _getData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(lat, lon) {
+    var url, data;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = "https://api.openweathermap.org/data/2.5/onecall?lat=".concat(lat, "&lon=").concat(lon, "&exclude=minutely,alert&appid=089669fece331a258cf56a3771f30bb9&units=metric");
+            _context.next = 3;
+            return fetch(url, {
+              mode: "cors"
+            });
+
+          case 3:
+            data = _context.sent;
+            return _context.abrupt("return", data.json());
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getData.apply(this, arguments);
+}
 
 /***/ }),
 /* 12 */
@@ -503,162 +529,148 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(48);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(49);
 /* harmony import */ var _getCity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /* eslint-disable no-unused-vars */
 
 
-
-const currentContainer = document.querySelector(".current-weather");
-const hourlyContainer = document.querySelector(".hourly-weather");
-const sideBarContainer = document.querySelector(".side-bar");
-const dayFormat = "MMM dd, p";
+var currentContainer = document.querySelector(".current-weather");
+var hourlyContainer = document.querySelector(".hourly-weather");
+var sideBarContainer = document.querySelector(".side-bar");
+var dayFormat = "MMM dd, p";
 
 function displayTemp(num) {
-  return `${num}°C`;
+  return "".concat(num, "\xB0C");
 }
 
 function displayWeatherIcon(iconCode, size) {
-  return `http://openweathermap.org/img/wn/${iconCode}${size}.png`;
-}
+  return "http://openweathermap.org/img/wn/".concat(iconCode).concat(size, ".png");
+} // DISPLAY CURRENT'S SUPPORT FUNCTION
 
-// DISPLAY CURRENT'S SUPPORT FUNCTION
+
 function displayCurrentHeader(name, country) {
-  const p = document.createElement("p");
+  var p = document.createElement("p");
   p.textContent = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(), dayFormat);
-  const h4 = document.createElement("h4");
-  h4.textContent = `${name}, ${country}`;
+  var h4 = document.createElement("h4");
+  h4.textContent = "".concat(name, ", ").concat(country);
   h4.className = "location";
   return [p, h4];
 }
+
 function displayCurrentMain(temp, icon) {
-  const div = document.createElement("div");
+  var div = document.createElement("div");
   div.className = "current";
-  const h2 = document.createElement("h2");
+  var h2 = document.createElement("h2");
   h2.className = "temp";
   h2.textContent = displayTemp(temp);
-
-  const img = document.createElement("img");
+  var img = document.createElement("img");
   img.src = displayWeatherIcon(icon, "@2x");
-
   div.appendChild(img);
   div.appendChild(h2);
-
   return div;
 }
+
 function displayInfo(category, info, unit) {
-  const p = document.createElement("p");
+  var p = document.createElement("p");
   p.className = category;
-  p.textContent = `${category}: ${info}${unit}`;
+  p.textContent = "".concat(category, ": ").concat(info).concat(unit);
   return p;
 }
-function displayCurrentMiscInfo(
-  pressure,
-  visibility,
-  humidity,
-  description,
-  feelsLike,
-  sunrise,
-  sunset
-) {
-  const div = document.createElement("div");
+
+function displayCurrentMiscInfo(pressure, visibility, humidity, description, feelsLike, sunrise, sunset) {
+  var div = document.createElement("div");
   div.className = "misc-info";
-
-  const sunriseTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(sunrise * 1000), "p");
-  const sunriseP = displayInfo("sunrise", sunriseTime, "");
-  const sunsetTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(sunset * 1000), "p");
-  const sunsetP = displayInfo("sunset", sunsetTime, "");
-
-  const pressureInfo = displayInfo("pressure", pressure, "mb");
-  const visibilityInfo = displayInfo("visibility", visibility / 1000, "km");
-  const humidityInfo = displayInfo("humidity", humidity, "%");
-
-  const h5 = document.createElement("h5");
+  var sunriseTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(sunrise * 1000), "p");
+  var sunriseP = displayInfo("sunrise", sunriseTime, "");
+  var sunsetTime = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(new Date(sunset * 1000), "p");
+  var sunsetP = displayInfo("sunset", sunsetTime, "");
+  var pressureInfo = displayInfo("pressure", pressure, "mb");
+  var visibilityInfo = displayInfo("visibility", visibility / 1000, "km");
+  var humidityInfo = displayInfo("humidity", humidity, "%");
+  var h5 = document.createElement("h5");
   h5.className = "description";
-  h5.textContent = `Feels like ${displayTemp(feelsLike)}. ${description}`;
-
+  h5.textContent = "Feels like ".concat(displayTemp(feelsLike), ". ").concat(description);
   div.appendChild(h5);
   div.appendChild(pressureInfo);
   div.appendChild(visibilityInfo);
   div.appendChild(humidityInfo);
   div.appendChild(sunriseP);
   div.appendChild(sunsetP);
-
   return div;
 }
+
 function displayCurrent(current, city) {
-  const { name, country } = city;
-  const { sunrise, sunset, temp, humidity, pressure, visibility } = current;
-  const { description, icon } = current.weather[0];
-  const feelsLike = current.feels_like;
-
-  const currentHeader = displayCurrentHeader(name, country);
-  const currentMain = displayCurrentMain(temp, icon);
-  const currentMisc = displayCurrentMiscInfo(
-    pressure,
-    visibility,
-    humidity,
-    description,
-    feelsLike,
-    sunrise,
-    sunset
-  );
-
+  var name = city.name,
+      country = city.country;
+  var sunrise = current.sunrise,
+      sunset = current.sunset,
+      temp = current.temp,
+      humidity = current.humidity,
+      pressure = current.pressure,
+      visibility = current.visibility;
+  var _current$weather$ = current.weather[0],
+      description = _current$weather$.description,
+      icon = _current$weather$.icon;
+  var feelsLike = current.feels_like;
+  var currentHeader = displayCurrentHeader(name, country);
+  var currentMain = displayCurrentMain(temp, icon);
+  var currentMisc = displayCurrentMiscInfo(pressure, visibility, humidity, description, feelsLike, sunrise, sunset);
   return [currentHeader[0], currentHeader[1], currentMain, currentMisc];
-}
+} // DISPLAY HOURLY WEATHER
 
-// DISPLAY HOURLY WEATHER
+
 function display1Hour(obj, gapToCurrent) {
-  const { temp } = obj;
-  const { icon, description } = obj.weather[0];
-
-  const hour = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date(), gapToCurrent));
-  const time = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(hour, dayFormat);
-  const timeDisplay = document.createElement("p");
+  var temp = obj.temp;
+  var _obj$weather$ = obj.weather[0],
+      icon = _obj$weather$.icon,
+      description = _obj$weather$.description;
+  var hour = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date(), gapToCurrent));
+  var time = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(hour, dayFormat);
+  var timeDisplay = document.createElement("p");
   timeDisplay.textContent = time;
-
-  const p = document.createElement("p");
+  var p = document.createElement("p");
   p.className = "hourly-temp";
   p.textContent = displayTemp(temp);
-
-  const img = document.createElement("img");
+  var img = document.createElement("img");
   img.src = displayWeatherIcon(icon, "");
-
-  const desc = document.createElement("p");
+  var desc = document.createElement("p");
   desc.textContent = description;
-
-  const div = document.createElement("div");
-  const infoDiv = document.createElement("div");
+  var div = document.createElement("div");
+  var infoDiv = document.createElement("div");
   infoDiv.className = "hourly-info";
-
-  const tempDiv = document.createElement("div");
+  var tempDiv = document.createElement("div");
   tempDiv.className = "temp-div";
   tempDiv.appendChild(p);
   tempDiv.appendChild(img);
   infoDiv.appendChild(tempDiv);
   infoDiv.appendChild(desc);
-
   div.className = "hourly";
   div.appendChild(timeDisplay);
   div.appendChild(infoDiv);
   return div;
 }
-function displayHourlyWeather(hourly) {
-  const h2 = document.createElement("h2");
-  h2.textContent = "5-hour forecast";
 
-  const localArr = [h2];
-  for (let i = 0; i < 5; i += 1) {
+function displayHourlyWeather(hourly) {
+  var h2 = document.createElement("h2");
+  h2.textContent = "5-hour forecast";
+  var localArr = [h2];
+
+  for (var i = 0; i < 5; i += 1) {
     localArr.push(display1Hour(hourly[i], i + 1));
   }
 
   return localArr;
-}
+} // DISPLAY SIDEBAR
 
-// DISPLAY SIDEBAR
+
 function displayUvi(uvi) {
-  const div = document.createElement("div");
+  var div = document.createElement("div");
   div.className = "uvi";
-  let category;
-  let color;
+  var category;
+  var color;
+
   if (uvi <= 2) {
     category = "low";
     color = "rgb(40, 149, 0)";
@@ -676,106 +688,116 @@ function displayUvi(uvi) {
     color = "rgb(107, 73, 200)";
   }
 
-  const i = document.createElement("i");
+  var i = document.createElement("i");
   i.setAttribute("class", "fas fa-sun");
-
-  const div1 = document.createElement("div");
+  var div1 = document.createElement("div");
   div1.className = "uvi-text";
-  const uviP = document.createElement("p");
-  uviP.textContent = `${uvi} UVI`;
-
-  const categoryP = document.createElement("p");
+  var uviP = document.createElement("p");
+  uviP.textContent = "".concat(uvi, " UVI");
+  var categoryP = document.createElement("p");
   categoryP.textContent = category;
   categoryP.style.backgroundColor = color;
-
   div1.appendChild(uviP);
   div1.appendChild(categoryP);
-
-  const div2 = document.createElement("div");
+  var div2 = document.createElement("div");
   div2.className = "uvi-info";
-  const desc = document.createElement("p");
-  desc.textContent = `${category} risk from UV rays`;
-
+  var desc = document.createElement("p");
+  desc.textContent = "".concat(category, " risk from UV rays");
   div2.appendChild(div1);
   div2.appendChild(desc);
-
   div.appendChild(i);
-
   div.appendChild(div2);
   return div;
 }
+
 function display1Day(dayObj, gapFromToday) {
-  const div = document.createElement("div");
+  var div = document.createElement("div");
   div.className = "next-1-day";
-  const { max, min } = dayObj.temp;
-  const { icon, main } = dayObj.weather[0];
-
-  const img = document.createElement("img");
+  var _dayObj$temp = dayObj.temp,
+      max = _dayObj$temp.max,
+      min = _dayObj$temp.min;
+  var _dayObj$weather$ = dayObj.weather[0],
+      icon = _dayObj$weather$.icon,
+      main = _dayObj$weather$.main;
+  var img = document.createElement("img");
   img.src = displayWeatherIcon(icon, "");
-
-  const div1 = document.createElement("div");
-
-  const day = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date(), gapFromToday), "MMM dd");
-  const dayP = document.createElement("p");
+  var div1 = document.createElement("div");
+  var day = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(new Date(), gapFromToday), "MMM dd");
+  var dayP = document.createElement("p");
   dayP.textContent = day;
-  const mainP = document.createElement("h5");
+  var mainP = document.createElement("h5");
   mainP.textContent = main;
   div1.appendChild(dayP);
   div1.appendChild(mainP);
-
-  const tempP = document.createElement("p");
-  tempP.textContent = `${Math.round(max)}°/${Math.round(min)}°`;
-
+  var tempP = document.createElement("p");
+  tempP.textContent = "".concat(Math.round(max), "\xB0/").concat(Math.round(min), "\xB0");
   div.appendChild(img);
   div.appendChild(div1);
-
   div.appendChild(tempP);
   return div;
 }
+
 function displayNextDays(daily, numDay) {
-  const div = document.createElement("div");
+  var div = document.createElement("div");
   div.className = "next-day";
-  const header = document.createElement("h5");
+  var header = document.createElement("h5");
   header.textContent = "Weather Prediction";
   div.appendChild(header);
-  for (let i = 0; i < numDay; i += 1) {
+
+  for (var i = 0; i < numDay; i += 1) {
     div.appendChild(display1Day(daily[i], i + 1));
   }
+
   return div;
 }
+
 function displaySidebar(dataJSON) {
-  const { uvi } = dataJSON.current;
-
-  const uviDiv = displayUvi(uvi);
-  const nextDays = displayNextDays(dataJSON.daily, 3);
-
+  var uvi = dataJSON.current.uvi;
+  var uviDiv = displayUvi(uvi);
+  var nextDays = displayNextDays(dataJSON.daily, 3);
   return [uviDiv, nextDays];
 }
+
 function displayWeather(dataJSON) {
-  const { lat, lon } = dataJSON;
+  var lat = dataJSON.lat,
+      lon = dataJSON.lon;
   currentContainer.innerHTML = "";
   hourlyContainer.innerHTML = "";
   sideBarContainer.innerHTML = "";
 
-  (async () => {
-    const city = await (0,_getCity__WEBPACK_IMPORTED_MODULE_0__["default"])(lat, lon);
-    const current = displayCurrent(dataJSON.current, city[0]);
-    current.forEach((element) => {
-      currentContainer.appendChild(element);
-    });
-  })();
+  _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var city, current;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_getCity__WEBPACK_IMPORTED_MODULE_0__["default"])(lat, lon);
 
-  const hourly = displayHourlyWeather(dataJSON.hourly);
-  hourly.forEach((element) => {
+          case 2:
+            city = _context.sent;
+            current = displayCurrent(dataJSON.current, city[0]);
+            current.forEach(function (element) {
+              currentContainer.appendChild(element);
+            });
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }))();
+
+  var hourly = displayHourlyWeather(dataJSON.hourly);
+  hourly.forEach(function (element) {
     hourlyContainer.appendChild(element);
   });
-
-  const sidebar = displaySidebar(dataJSON);
-  sidebar.forEach((element) => {
+  var sidebar = displaySidebar(dataJSON);
+  sidebar.forEach(function (element) {
     sideBarContainer.appendChild(element);
   });
 }
-
 
 /***/ }),
 /* 13 */
@@ -785,14 +807,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getCity)
 /* harmony export */ });
-async function getCity(lat, lon) {
-  const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=089669fece331a258cf56a3771f30bb9`;
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-  const data = await fetch(url, { mode: "cors" });
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-  return data.json();
+function getCity(_x, _x2) {
+  return _getCity.apply(this, arguments);
 }
 
+function _getCity() {
+  _getCity = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(lat, lon) {
+    var url, data;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = "http://api.openweathermap.org/geo/1.0/reverse?lat=".concat(lat, "&lon=").concat(lon, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
+            _context.next = 3;
+            return fetch(url, {
+              mode: "cors"
+            });
+
+          case 3:
+            data = _context.sent;
+            return _context.abrupt("return", data.json());
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getCity.apply(this, arguments);
+}
 
 /***/ }),
 /* 14 */
@@ -3836,36 +3884,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _getData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _displayData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
 
-const form = document.querySelector("form");
-const input = document.querySelector("input");
+var form = document.querySelector("form");
+var input = document.querySelector("input");
 
-async function getGeoCoding(cityName) {
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=089669fece331a258cf56a3771f30bb9`;
-  const response = await fetch(url, { mode: "cors" });
-
-  return response.json();
+function getGeoCoding(_x) {
+  return _getGeoCoding.apply(this, arguments);
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  getGeoCoding(input.value).then((data) => {
-    const { lat, lon } = data[0];
+function _getGeoCoding() {
+  _getGeoCoding = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(cityName) {
+    var url, response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            url = "http://api.openweathermap.org/geo/1.0/direct?q=".concat(cityName, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
+            _context.next = 3;
+            return fetch(url, {
+              mode: "cors"
+            });
 
+          case 3:
+            response = _context.sent;
+            return _context.abrupt("return", response.json());
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getGeoCoding.apply(this, arguments);
+}
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  getGeoCoding(input.value).then(function (data) {
+    var _data$ = data[0],
+        lat = _data$.lat,
+        lon = _data$.lon;
     (0,_getData__WEBPACK_IMPORTED_MODULE_1__["default"])(lat, lon).then(_displayData__WEBPACK_IMPORTED_MODULE_2__["default"]);
   });
   form.reset();
-});
+}); // default display Hanoi's weather when first load page
 
-// default display Hanoi's weather when first load page
-document.addEventListener(
-  "DOMContentLoaded",
-  (0,_getData__WEBPACK_IMPORTED_MODULE_1__["default"])(21.0294, 105.8544).then(_displayData__WEBPACK_IMPORTED_MODULE_2__["default"])
-);
-
+document.addEventListener("DOMContentLoaded", (0,_getData__WEBPACK_IMPORTED_MODULE_1__["default"])(21.0294, 105.8544).then(_displayData__WEBPACK_IMPORTED_MODULE_2__["default"]));
 })();
 
 /******/ })()
