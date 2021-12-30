@@ -2,6 +2,9 @@ import "./style.css";
 import getData from "./getData";
 import displayWeather from "./displayData";
 
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 
