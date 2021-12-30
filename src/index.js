@@ -1,12 +1,12 @@
 import "./style.css";
-import displayCurrent from "./displayCurrentControl";
+import getData from "./getData";
+import displayWeather from "./displayData";
 
 const form = document.querySelector("form");
 const input = document.querySelector("input");
-const currentWeatherContainer = document.querySelector(".current-weather");
 
-async function getWeather(cityName) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=089669fece331a258cf56a3771f30bb9&units=metric`;
+async function getGeoCoding(cityName) {
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=089669fece331a258cf56a3771f30bb9`;
   const response = await fetch(url, { mode: "cors" });
 
   return response.json();
@@ -14,10 +14,16 @@ async function getWeather(cityName) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  getWeather(input.value).then((data) => {
-    console.log(data, typeof data);
-    const currentWeather = displayCurrent(data);
-    currentWeatherContainer.appendChild(currentWeather);
+  getGeoCoding(input.value).then((data) => {
+    const { lat, lon } = data[0];
+
+    getData(lat, lon).then(displayWeather);
   });
   form.reset();
 });
+
+// default display Hanoi's weather when first load page
+document.addEventListener(
+  "DOMContentLoaded",
+  getData(21.0294, 105.8544).then(displayWeather)
+);
