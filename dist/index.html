@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/2964ed255d.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Weather App</title>
   </head>
   <body>
@@ -18,15 +22,16 @@
             placeholder="Search your location ..."
           />
         </p>
-        <button type="submit">Submit</button>
+        <button type="submit">
+          <i class="fas fa-search"></i>
+        </button>
       </form>
     </header>
 
     <main>
       <div class="current-weather"></div>
       <div class="hourly-weather"></div>
-      <div class="tmr-weather"></div>
-      <div class="next-weather"></div>
+      <div class="side-bar"></div>
     </main>
 
     <script src="./bundle.js"></script>
