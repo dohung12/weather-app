@@ -557,7 +557,7 @@ function displayTemp(num) {
 }
 
 function displayWeatherIcon(iconCode, size) {
-  return "http://openweathermap.org/img/wn/".concat(iconCode).concat(size, ".png");
+  return "https://openweathermap.org/img/wn/".concat(iconCode).concat(size, ".png");
 } // DISPLAY CURRENT'S SUPPORT FUNCTION
 
 
@@ -834,7 +834,7 @@ function _getCity() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            url = "http://api.openweathermap.org/geo/1.0/reverse?lat=".concat(lat, "&lon=").concat(lon, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
+            url = "https://api.openweathermap.org/geo/1.0/reverse?lat=".concat(lat, "&lon=").concat(lon, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
             _context.next = 3;
             return fetch(url, {
               mode: "cors"
@@ -20752,7 +20752,7 @@ function _getGeoCoding() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            url = "http://api.openweathermap.org/geo/1.0/direct?q=".concat(cityName, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
+            url = "https://api.openweathermap.org/geo/1.0/direct?q=".concat(cityName, "&limit=1&appid=089669fece331a258cf56a3771f30bb9");
             _context.next = 3;
             return fetch(url, {
               mode: "cors"
