@@ -12,7 +12,7 @@ function displayTemp(num) {
 }
 
 function displayWeatherIcon(iconCode, size) {
-  return `http://openweathermap.org/img/wn/${iconCode}${size}.png`;
+  return `https://openweathermap.org/img/wn/${iconCode}${size}.png`;
 }
 
 // DISPLAY CURRENT'S SUPPORT FUNCTION

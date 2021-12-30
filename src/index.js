@@ -9,7 +9,7 @@ const form = document.querySelector("form");
 const input = document.querySelector("input");
 
 async function getGeoCoding(cityName) {
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=089669fece331a258cf56a3771f30bb9`;
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=089669fece331a258cf56a3771f30bb9`;
   const response = await fetch(url, { mode: "cors" });
 
   return response.json();
