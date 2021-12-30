@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/dohung12/weather-app#readme",
   "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
